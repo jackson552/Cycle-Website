@@ -99,41 +99,38 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 
 /* ── Waitlist form ────────────────────────────────────────── */
-const form       = document.getElementById('waitlist-form');
-const successEl  = document.getElementById('waitlist-success');
+const form      = document.getElementById('waitlist-form');
+const successEl = document.getElementById('waitlist-success');
 
 form?.addEventListener('submit', async e => {
-  const action = form.getAttribute('action') || '';
-
-  // Demo mode: Formspree not yet configured
-  if (action.includes('YOUR_FORM_ID')) {
-    e.preventDefault();
-    showSuccess();
-    return;
-  }
-
   e.preventDefault();
-  const submitBtn = form.querySelector('[type="submit"]');
-  submitBtn.disabled = true;
+
+  const submitBtn  = form.querySelector('[type="submit"]');
+  const origLabel  = submitBtn.textContent;
+  submitBtn.disabled    = true;
   submitBtn.textContent = 'Submitting…';
 
-  try {
-    const res = await fetch(action, {
-      method: 'POST',
-      body: new FormData(form),
-      headers: { Accept: 'application/json' }
-    });
+  const data = new FormData(form);
+  const payload = {
+    name:   data.get('name')   || '',
+    email:  data.get('email')  || '',
+    source: data.get('source') || ''
+  };
 
-    if (res.ok) {
-      showSuccess();
-    } else {
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Reserve My Spot →';
-      alert('Something went wrong. Please try again.');
-    }
+  try {
+    // Google Apps Script requires no-cors from static sites.
+    // We can't read the response, so we show success optimistically.
+    await fetch(form.action, {
+      method:  'POST',
+      mode:    'no-cors',
+      headers: { 'Content-Type': 'text/plain' },
+      body:    JSON.stringify(payload)
+    });
+    showSuccess();
   } catch {
-    // Network error — fallback to native submit
-    form.submit();
+    submitBtn.disabled    = false;
+    submitBtn.textContent = origLabel;
+    alert('Something went wrong — please try again.');
   }
 });
 
