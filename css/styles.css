@@ -215,7 +215,6 @@ p { color: var(--text-2); line-height: 1.75; }
   font-weight: 400;
   letter-spacing: 0.1em;
   color: var(--text);
-  display: none;
 }
 
 /* Links */
@@ -711,8 +710,24 @@ p { color: var(--text-2); line-height: 1.75; }
 .phase-card__name {
   font-size: 1.9rem;
   color: var(--text);
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
+
+.phase-card__hormone {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: var(--r-pill);
+  margin-bottom: 12px;
+  opacity: 0.85;
+}
+.phase-card[data-phase="reset"]   .phase-card__hormone { background: var(--reset-bg);   color: var(--reset-fg);   }
+.phase-card[data-phase="rise"]    .phase-card__hormone { background: var(--rise-bg);    color: var(--rise-fg);    }
+.phase-card[data-phase="thrive"]  .phase-card__hormone { background: var(--thrive-bg);  color: var(--thrive-fg);  }
+.phase-card[data-phase="balance"] .phase-card__hormone { background: var(--balance-bg); color: var(--balance-fg); }
 
 .phase-card__benefit {
   font-family: var(--serif);
