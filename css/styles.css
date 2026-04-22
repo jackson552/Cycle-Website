@@ -374,8 +374,8 @@ p { color: var(--text-2); line-height: 1.75; }
 /* Product section real image */
 .product__visual .asset-img.is-loaded {
   width: 100%;
-  border-radius: var(--r-xl);
-  box-shadow: var(--shadow-lg);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-md);
 }
 
 /* Waitlist real image */
