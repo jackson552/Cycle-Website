@@ -129,6 +129,16 @@ p { color: var(--text-2); line-height: 1.75; }
   color: var(--text-2);
 }
 
+.section-note {
+  margin-top: 18px;
+  font-size: 0.95rem;
+  color: var(--text-3);
+  line-height: 1.8;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* ── Buttons ──────────────────────────────────────────────── */
 .btn {
   display: inline-flex;
